@@ -1,0 +1,33 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+* {
+  box-sizing: border-box;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.fullsize {
+  width: 100%;
+}
+
+*[contentEditable="true"] {
+  outline: none;
+}
+*[contentEditable="true"]:focus,
+*[contentEditable="true"]:hover {
+  color: rgb(127, 127, 127);
+}
+/* .scaled {
+    transform: scale(0.82);
+    margin-left: -8.1rem;
+    border: solid 1px red;
+    margin-top: -2.4rem;
+  } */

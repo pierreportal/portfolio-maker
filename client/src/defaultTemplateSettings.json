@@ -1,0 +1,23 @@
+{
+  "style": {
+    "defaultSectionTitleStyling": {
+      "width": "90%",
+      "padding": "1rem 0",
+      "textAlign": "left",
+      "margin": "0 auto",
+      "fontWeight": "bold"
+    },
+    "defaultTextComponentStyling": {
+      "width": "90%",
+      "padding": "1rem 0",
+      "textAlign": "left",
+      "margin": "0 auto"
+    },
+    "defaultGridStyling": {
+      "padding": "0",
+      "gridGap": ".6rem",
+      "width": "90%",
+      "margin": "0 auto"
+    }
+  }
+}

@@ -1,0 +1,301 @@
+.dashboard-editor {
+  width: 16rem;
+  background-color: #ddd;
+  height: 100vh;
+  transition: width 0.2s ease;
+  position: absolute;
+  right: 0;
+}
+.dashboard-editor.hidden {
+  width: 0px;
+}
+
+.editor-close-button {
+  width: 3rem;
+  border: none;
+  background-color: rgb(159, 159, 159);
+  padding: 0.5rem;
+  margin-left: 0px;
+  transition: all 0.2s ease;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+.dashboard-editor.hidden > .editor-close-button {
+  position: absolute;
+  margin-left: -50px;
+  background-color: #eee;
+  color: rgb(159, 159, 159);
+}
+
+.dashboard-editor.hidden > .editor-close-button:hover {
+  background-color: #ddd;
+}
+
+.editor-settings-container {
+  opacity: 1;
+  transition-delay: 2s;
+  transition: opacity 0.2s ease;
+  padding: 0 1rem;
+  overflow-y: scroll;
+}
+
+.dashboard-editor.hidden > .editor-settings-container {
+  opacity: 0;
+  transform: scale(0);
+}
+.module-list-item {
+  padding: 0.7rem 0;
+  background-color: #eee;
+  position: relative;
+  transition: background-color 0.2s ease;
+  font-variant: all-petite-caps;
+  cursor: grab;
+}
+
+.module-list-item:hover {
+  background-color: white;
+}
+.module-list-item > button {
+  position: absolute;
+  height: 100%;
+  width: 30px;
+  color: rgb(127, 127, 127);
+  opacity: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.module-list-item:hover > button {
+  opacity: 1;
+}
+.module-list-item > button:first-of-type {
+  background-color: #eee;
+  top: -0.6rem;
+  left: -0.6rem;
+}
+.module-list-item > button:first-of-type:hover {
+  background-color: lightgreen;
+}
+.module-list-item > button:nth-of-type(2) {
+  background-color: #eee;
+  top: -0.6rem;
+  right: -0.6rem;
+}
+.module-list-item > button:nth-of-type(2):hover {
+  background-color: tomato;
+  color: white;
+}
+.module-list-item > button:nth-of-type(2).confirm-delete {
+  width: 5rem;
+}
+
+.module-list-item-settings {
+  background-color: white;
+  position: relative;
+  padding: 0.7rem 0;
+}
+.add-new-module-in-lidt-button {
+  padding: 0.7rem 0;
+  background-color: #ddd;
+  border: dashed 2px rgb(159, 159, 159);
+  color: rgb(159, 159, 159);
+  position: relative;
+  transition: background-color 0.2s ease;
+  font-variant: all-petite-caps;
+  cursor: pointer;
+}
+.editor-settings-container ul {
+  list-style: none;
+  padding: 0;
+  position: relative;
+}
+.editor-settings-container p {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgb(127, 127, 127);
+}
+.editor-settings-container ul:not(.settings-list)::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  left: calc(50% - 1px);
+  background-color: rgb(159, 159, 159);
+}
+.editor-settings-container ul:not(.settings-list)::after {
+  content: "";
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  left: calc(50% - 5px);
+  border-top: transparent 4px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid rgb(159, 159, 159);
+}
+
+/* .module-list-item-settings {
+
+}
+.module-list-item-settings.closed {
+}
+.module-list-item-settings * {
+}
+
+.module-list-item-settings.closed * {
+} */
+
+.module-list-item-settings ul li {
+  text-align: left !important;
+  padding: 0 0.7rem;
+  font-variant: all-petite-caps;
+  color: rgb(127, 127, 127);
+}
+
+.editor-settings-container ul li {
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+.add-new-module-in-lidt-button {
+  position: relative;
+  font-variant: all-petite-caps;
+}
+
+.editor-settings-container button {
+  border: none;
+  background-color: #eee;
+  margin: 0.6rem;
+  padding: 0.5rem;
+  outline: none;
+}
+.editor-settings-container h4 {
+  width: 100%;
+  text-align: center;
+  color: rgb(127, 127, 127);
+}
+.settings-list li {
+  display: flex;
+  justify-content: space-between;
+}
+.settings-list input {
+  background-color: #eee;
+  border: none;
+  outline: none;
+  padding: 0.2rem 0.4rem;
+  width: 6rem;
+  color: rgb(127, 127, 127);
+}
+
+.editor-switch-component {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 0;
+  align-items: center;
+  color: rgb(127, 127, 127);
+  font-variant: small-caps;
+}
+
+.editor-button-switch-label {
+  margin-top: -0.3rem;
+}
+
+.editor-button-switch-container {
+  width: 25px;
+  height: 12px !important;
+  position: relative;
+  display: flex;
+  border-radius: 10px;
+  background-color: rgb(159, 159, 159);
+  border: solid 2px rgb(159, 159, 159);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.editor-button-switch-container:not(.activated):hover {
+  background-color: rgb(168, 168, 168);
+  border: solid 2px rgb(168, 168, 168);
+}
+
+.editor-button-switch-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: lightgray;
+  margin-left: 0px;
+  transition: margin-left 0.2s ease;
+}
+
+.editor-button-switch-container.activated {
+  background-color: #5cdd5c;
+  border: solid 2px #4fd34f;
+}
+
+.editor-button-switch-container.activated > .editor-button-switch-inner {
+  margin-left: 13px;
+}
+
+.text-formater-container {
+  position: absolute;
+  background-color: #ddd;
+  margin-top: -1rem;
+  z-index: 999999;
+  display: flex;
+  padding: 0.3rem;
+}
+
+.text-formater-container ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-right: 6px;
+}
+
+.text-formater-container ul:last-of-type {
+  margin-right: 0;
+}
+
+.editor-dropdown-component {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.editor-button-dropdown-label {
+  font-variant: small-caps;
+  color: rgb(127, 127, 127);
+}
+
+.editor-button-dropdown-container {
+  position: relative;
+  background-color: #eee;
+  color: rgb(127, 127, 127);
+  height: 2rem;
+  width: 11rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.editor-button-dropdown-list {
+  position: absolute;
+  top: 2rem;
+  background-color: #eee;
+  width: 100%;
+  z-index: 99999;
+}
+
+.editor-button-dropdown-item {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-button-dropdown-item.selected {
+  background-color: white;
+}
