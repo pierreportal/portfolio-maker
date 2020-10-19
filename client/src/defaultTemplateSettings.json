@@ -1,23 +1,47 @@
 {
   "style": {
-    "defaultSectionTitleStyling": {
+    "floatHeader": {
+      "width": "90%",
+      "justifyContent": "space-between",
+      "padding": "0",
+      "fontSize": "4rem",
+      "margin": "0 auto"
+    },
+    "sectionTitle": {
       "width": "90%",
       "padding": "1rem 0",
       "textAlign": "left",
       "margin": "0 auto",
-      "fontWeight": "bold"
+      "fontWeight": "bold",
+      "backgroundColor": "transparent",
+      "color": "black"
     },
-    "defaultTextComponentStyling": {
+    "textComponent": {
       "width": "90%",
       "padding": "1rem 0",
       "textAlign": "left",
       "margin": "0 auto"
     },
-    "defaultGridStyling": {
+    "grid": {
       "padding": "0",
-      "gridGap": ".6rem",
-      "width": "90%",
+      "gridGap": "0rem",
+      "width": "100%",
       "margin": "0 auto"
+    },
+    "collumn": {
+      "padding": "0",
+      "gridGap": "0rem",
+      "width": "100%",
+      "margin": "0 auto"
+    },
+    "aliceRollMenu": {
+      "width": "100vw",
+      "height": "3rem",
+      "justifyContent": "center",
+      "padding": "2rem",
+      "fontSize": "4rem",
+      "backgroundColor": "black",
+      "color": "white"
     }
   }
 }

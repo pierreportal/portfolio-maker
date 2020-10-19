@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ModuleListItem from "./ModuleListItem";
 import Switch from "../UIElements/Switch";
 import Dropdown from "../UIElements/Dropdown";
+import Input from "../UIElements/Input";
 
 export default function SideBar(props) {
   const { buildTemplate, isLoggedin, templateModules } = props;
@@ -10,10 +11,15 @@ export default function SideBar(props) {
   const [modules, setModules] = useState(templateModules);
   const [sideBarActive, setSideBarActive] = useState(props.sideBarState);
   const [headMenuActive, setHeadMenuActive] = useState(props.headMenuState);
+  const [bgColor, setBgColor] = useState(props.bgColorState);
   const [headingDefaultMargin, setHeadingDefaultMargin] = useState(
     props.stateOfheadingDefaultMargin
   );
 
+  const changeBgColor = (color) => {
+    props.changeBgColor(color);
+    setBgColor(color);
+  };
   const toggleHeadMenu = () => {
     props.toggleHeadMenu(!headMenuActive);
     setHeadMenuActive(!headMenuActive);
@@ -61,6 +67,21 @@ export default function SideBar(props) {
 
   const setFont = (font) => props.setFont(font);
 
+  const savedHeadMenuStyle = {
+    textAlign: "left",
+    justifyContent: "space-between",
+    background: true,
+    backgroundColor: "#fff",
+  };
+
+  const headMenuStylePanel =
+    savedHeadMenuStyle &&
+    Object.keys(savedHeadMenuStyle).map((k) => (
+      <li>
+        {k}: <input type="text" value={savedHeadMenuStyle[k]} name={k} />
+      </li>
+    ));
+
   return (
     <>
       {isLoggedin && (
@@ -73,11 +94,8 @@ export default function SideBar(props) {
             {/* MAIN STYLE */}
             <h4>general styling</h4>
 
-            {/* <Switch
-              activate={false}
-              action={toggleDarkTheme}
-              label={"Dark theme"}
-            /> */}
+            <Input value={bgColor} label={"BG Color"} action={changeBgColor} />
+
             <Dropdown
               options={["arial", "helvetica", "courier", "futura", "impact"]}
               label={"font"}
@@ -101,6 +119,13 @@ export default function SideBar(props) {
                 label={"Header menu"}
               />
             </div>
+            {headMenuActive && (
+              <>
+                <div className={`module-list-item-settings`}>
+                  <ul className="settings-list">{headMenuStylePanel}</ul>
+                </div>
+              </>
+            )}
 
             <div className="row">
               <Switch

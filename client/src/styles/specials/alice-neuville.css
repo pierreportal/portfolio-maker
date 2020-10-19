@@ -1,0 +1,74 @@
+.floatHeader {
+  position: fixed;
+  z-index: 1;
+
+  padding: 2rem;
+  font-size: 4rem;
+  mix-blend-mode: exclusion;
+  color: white;
+  text-transform: uppercase;
+
+  /* z-index: 99999; */
+}
+
+.floatHeader > .menu-button {
+  cursor: pointer;
+}
+
+.floatHeader.menu {
+  background-color: white;
+  mix-blend-mode: normal;
+  color: black;
+  text-align: right;
+  position: absolute;
+  right: 0;
+  top: 5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  /* padding: 0; */
+}
+.floatHeader.menu ul {
+  list-style: none;
+}
+
+.floatHeader-helpermargin {
+  width: 100%;
+  margin-top: 5rem;
+}
+
+.alicerollmenu {
+  font-size: 2rem !important;
+  display: flex;
+  align-items: center;
+}
+
+.alicerollmenu-content {
+  animation: rollingMenu 10s linear;
+  animation-iteration-count: infinite;
+  text-overflow: unset;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.alicerollmenu-content:hover {
+  animation-play-state: paused;
+}
+
+.alicerollmenu-content > div:hover {
+  text-decoration: underline;
+}
+
+.alicerollmenu-content > div {
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@keyframes rollingMenu {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}

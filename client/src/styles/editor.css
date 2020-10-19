@@ -5,6 +5,7 @@
   transition: width 0.2s ease;
   position: absolute;
   right: 0;
+  z-index: 2;
 }
 .dashboard-editor.hidden {
   width: 0px;

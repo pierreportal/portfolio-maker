@@ -2,9 +2,11 @@
   "name": "makeyourportfolio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "dev": "DEBUG=server:* nodemon ./bin/www",
+    "dev-windows": "nodemon ./bin/www"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +21,13 @@
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.9",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "client/*"
+    ]
   }
 }

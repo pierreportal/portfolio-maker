@@ -7,98 +7,48 @@ import SectionTitle from "./SectionTitle";
 import TextComponent from "./TextComponent";
 import TextGridTemplate from "./TextGridTemplate";
 import defaultSettings from "../../defaultTemplateSettings.json";
+import AliceRollMenu from "../specials/AN/AliceRollMenu";
+import FloatHeader from "../specials/AN/FloatHeader";
+import routes from "../../routes/AN/settings.json";
 import data from "../../fakeDB.json";
 
-const { posts } = data;
+const { feeds, templateModuleList } = data;
+
+const mainPosts = feeds.find((x) => x.name === "mainposts").posts;
+
+const mainPageTemplate = templateModuleList.find((x) => x.name === "main")
+  .template;
+
+const feedManager = {
+  mainPage: mainPosts,
+};
 
 const testUserSetting = {
   font: "default",
+  bgColor: "lightgreen",
   headMenu: false,
-  sideBar: true,
-  headingDefaultMargin: true,
+  sideBar: false,
+  headingDefaultMargin: false,
 };
 
-const templateModuleList = [
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "sectionTitle",
-    label: "Section Title",
-    content: "Latest Work",
-    style: defaultSettings.style.defaultSectionTitleStyling,
-    params: { level: "1" },
-  },
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "sectionTitle",
-    label: "Section Title",
-    content: "The Ghost in the Machine ~ Japan 2019",
-    style: defaultSettings.style.defaultSectionTitleStyling,
-    params: { level: "2" },
-  },
-
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "grid",
-    label: "Grid",
-    style: defaultSettings.style.defaultGridStyling,
-    params: {
-      feed: posts,
-      nCols: 5,
-      boxSizes: [
-        { width: 3, height: 1 },
-        { width: 2, height: 1 },
-        { width: 1, height: 1 },
-        { width: 3, height: 1 },
-      ],
-      rowHeight: "25rem",
-    },
-  },
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "sectionTitle",
-    label: "Section Title",
-    content: "This is the second section",
-    style: defaultSettings.style.defaultSectionTitleStyling,
-    params: { level: "3" },
-  },
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "textComponent",
-    label: "Text Paragraph",
-    content:
-      "this is an example of long text Charles-Pierre Baudelaire war ein französischer Schriftsteller und einer der bedeutendsten Lyriker der französischen Sprache. Er ist vor allem durch seine Gedichtsammlung Les Fleurs du Mal bekannt geworden und gilt als wichtiger Wegbereiter der literarischen",
-    style: defaultSettings.style.defaultTextComponentStyling,
-  },
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "textComponent",
-    label: "Text Paragraph",
-    content:
-      "this is an example of long text Charles-Pierre Baudelaire war französischen Sprache. Er ist vor allem durch seine Gedichtsammlung Les Fleurs du Mal bekannt geworden und gilt als wichtiger Wegbereiter der literarischen",
-    style: defaultSettings.style.defaultTextComponentStyling,
-  },
-  {
-    id: `${Math.random() * 10 ** 10}`,
-    type: "collumn",
-    label: "Text Collumns",
-    style: defaultSettings.style.defaultGridStyling,
-    params: {
-      nCols: 2,
-      boxSizes: [],
-      rowHeight: "auto",
-    },
-  },
-];
+const styledTemplateModuleList = mainPageTemplate.map((x) => ({
+  ...x,
+  style: defaultSettings.style[x.type],
+}));
 
 export default function Dashboard(props) {
   const { isLoggedin } = props;
   const [addSideBar, setAddSideBar] = useState(testUserSetting.sideBar);
   const [addHeadMenu, setAddHeadMenu] = useState(testUserSetting.headMenu);
   const [templateFont, setTemplateFont] = useState(testUserSetting.font);
+  const [templateBgColor, setTemplateBgColor] = useState(
+    testUserSetting.bgColor
+  );
   const [modularTemplate, setModularTemplate] = useState([]);
   const [headingDefaultMargin, setHeadingDefaultMargin] = useState(
     testUserSetting.headingDefaultMargin
   );
+  const changeBgColor = (color) => setTemplateBgColor(color);
   const setFont = (font) => setTemplateFont(font);
   const toggleSideBar = () => setAddSideBar(!addSideBar);
   const toggleHeadMenu = () => setAddHeadMenu(!addHeadMenu);
@@ -111,7 +61,7 @@ export default function Dashboard(props) {
         <GridTemplate
           isLoggedin={isLoggedin}
           key={i}
-          feed={module.params.feed}
+          feed={feedManager.mainPage}
           params={module.params}
           style={module.style}
         />
@@ -124,6 +74,13 @@ export default function Dashboard(props) {
           heading={true}
           content={true}
         />
+      ) : module.type === "aliceRollMenu" ? (
+        <AliceRollMenu
+          isLoggedin={isLoggedin}
+          key={i}
+          style={module.style}
+          navigationRoutes={routes.rollingMenu}
+        />
       ) : module.type === "sectionTitle" ? (
         <SectionTitle
           isLoggedin={isLoggedin}
@@ -131,6 +88,13 @@ export default function Dashboard(props) {
           content={module.content}
           params={module.params}
           style={module.style}
+        />
+      ) : module.type === "floatHeader" ? (
+        <FloatHeader
+          isLoggedin={isLoggedin}
+          key={i}
+          style={module.style}
+          navigationRoutes={routes.headMenu}
         />
       ) : (
         <TextComponent
@@ -151,8 +115,9 @@ export default function Dashboard(props) {
       : { height: "calc(100vh - 3rem)" },
   };
 
-  const fontStyle =
-    templateFont !== "default" ? { style: { fontFamily: templateFont } } : {};
+  const fontStyle = {
+    style: { fontFamily: templateFont, backgroundColor: templateBgColor },
+  };
 
   return (
     <div className="row fullsize">
@@ -174,7 +139,7 @@ export default function Dashboard(props) {
       <Editor
         isLoggedin={isLoggedin}
         buildTemplate={buildTemplate}
-        templateModules={templateModuleList}
+        templateModules={styledTemplateModuleList}
         toggleSideBar={toggleSideBar}
         sideBarState={addSideBar}
         headMenuState={addHeadMenu}
@@ -183,6 +148,8 @@ export default function Dashboard(props) {
         toggleHeadingDefaultMargin={toggleHeadingDefaultMargin}
         stateOfheadingDefaultMargin={headingDefaultMargin}
         selectedFont={templateFont}
+        bgColorState={templateBgColor}
+        changeBgColor={changeBgColor}
       />
     </div>
   );

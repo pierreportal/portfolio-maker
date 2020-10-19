@@ -1,0 +1,30 @@
+{
+  "headMenu": [
+    {
+      "label": "decors",
+      "url": "/decors"
+    },
+    {
+      "label": "films",
+      "url": "/films"
+    },
+    {
+      "label": "contact",
+      "url": "/contact"
+    }
+  ],
+  "rollingMenu": [
+    {
+      "label": "I Make Movies",
+      "url": "/films"
+    },
+    {
+      "label": "I Decorate",
+      "url": "/decors"
+    },
+    {
+      "label": "Contact Me",
+      "url": "/contact"
+    }
+  ]
+}

@@ -1,57 +1,141 @@
 {
-  "posts": [
+  "feeds": [
     {
-      "id": 0,
+      "name": "mainposts",
+      "posts": [
+        {
+          "id": 0,
 
-      "content": "this is the post content...",
-      "img": "https://images.unsplash.com/photo-1602595353668-410ccaa0ec01?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"
-    },
+          "content": "this is the post content...",
+          "img": "https://images.unsplash.com/photo-1602595353668-410ccaa0ec01?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"
+        },
+        {
+          "id": 1,
+          "content": "this is the post content...",
+          "img": "https://images.unsplash.com/photo-1579051802437-d406d417cc3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "id": 2,
+          "title": "A",
+          "content": "If you're losing your soul and you know it, then you've still got a soul left to lose. Bad taste creates many more millionaires than good taste.",
+          "img": false
+        },
+        {
+          "id": 3,
+          "title": "",
+          "content": "this is the post content...",
+          "img": "https://images.unsplash.com/photo-1602343032387-fff895ded120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "id": 4,
+          "title": "",
+          "content": "this is the post content...",
+          "img": "https://images.unsplash.com/photo-1599831094491-946f9e799da3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1007&q=80"
+        },
+        {
+          "id": 5,
+          "title": "1/5",
+          "content": "this is the post content...",
+          "img": false
+        },
+        {
+          "id": 6,
+          "title": "",
+          "content": "",
+          "img": false
+        },
+        {
+          "id": 7,
+          "img": "https://images.unsplash.com/photo-1602509913811-3928264564d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=670&q=80"
+        },
+        {
+          "id": 8,
+          "img": "https://images.unsplash.com/photo-1580870858053-8d0764624f4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2035&q=80"
+        },
+        {
+          "id": 9,
+          "img": "https://images.unsplash.com/photo-1586753513812-462ed2a82584?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        }
+      ]
+    }
+  ],
+
+  "templateModuleList": [
     {
-      "id": 1,
-      "content": "this is the post content...",
-      "img": "https://images.unsplash.com/photo-1579051802437-d406d417cc3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-    },
-    {
-      "id": 2,
-      "title": "A",
-      "content": "If you're losing your soul and you know it, then you've still got a soul left to lose. Bad taste creates many more millionaires than good taste.",
-      "img": false
-    },
-    {
-      "id": 3,
-      "title": "",
-      "content": "this is the post content...",
-      "img": "https://images.unsplash.com/photo-1602343032387-fff895ded120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-    },
-    {
-      "id": 4,
-      "title": "",
-      "content": "this is the post content...",
-      "img": "https://images.unsplash.com/photo-1599831094491-946f9e799da3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1007&q=80"
-    },
-    {
-      "id": 5,
-      "title": "1/5",
-      "content": "this is the post content...",
-      "img": false
-    },
-    {
-      "id": 6,
-      "title": "",
-      "content": "",
-      "img": false
-    },
-    {
-      "id": 7,
-      "img": "https://images.unsplash.com/photo-1602509913811-3928264564d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=670&q=80"
-    },
-    {
-      "id": 8,
-      "img": "https://images.unsplash.com/photo-1580870858053-8d0764624f4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2035&q=80"
-    },
-    {
-      "id": 9,
-      "img": "https://images.unsplash.com/photo-1586753513812-462ed2a82584?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+      "name": "main",
+      "template": [
+        {
+          "id": 0,
+          "type": "floatHeader",
+          "label": "Foating Header"
+        },
+        {
+          "id": 1,
+          "type": "aliceRollMenu",
+          "label": "Roller"
+        },
+
+        {
+          "id": 2,
+          "type": "sectionTitle",
+          "label": "Section Title",
+          "content": "Latest Work",
+          "params": { "level": "1" }
+        },
+        {
+          "id": 3,
+          "type": "sectionTitle",
+          "label": "Section Title",
+          "content": "The Ghost in the Machine ~ Japan 2019",
+          "params": { "level": "2" }
+        },
+
+        {
+          "id": 4,
+          "type": "grid",
+          "label": "Grid",
+          "params": {
+            "feed": "posts",
+            "nCols": 1,
+            "boxSizes": [
+              { "width": 1, "height": 1 },
+              { "width": 1, "height": 1 },
+              { "width": 1, "height": 1 },
+              { "width": 1, "height": 1 }
+            ],
+            "rowHeight": "100vh"
+          }
+        },
+        {
+          "id": 5,
+          "type": "sectionTitle",
+          "label": "Section Title",
+          "content": "This is the second section",
+          "params": { "level": "3" }
+        },
+        {
+          "id": 6,
+          "type": "textComponent",
+          "label": "Text Paragraph",
+          "content": "this is an example of long text Charles-Pierre Baudelaire war ein französischer Schriftsteller und einer der bedeutendsten Lyriker der französischen Sprache. Er ist vor allem durch seine Gedichtsammlung Les Fleurs du Mal bekannt geworden und gilt als wichtiger Wegbereiter der literarischen"
+        },
+        {
+          "id": 7,
+          "type": "textComponent",
+          "label": "Text Paragraph",
+          "content": "this is an example of long text Charles-Pierre Baudelaire war französischen Sprache. Er ist vor allem durch seine Gedichtsammlung Les Fleurs du Mal bekannt geworden und gilt als wichtiger Wegbereiter der literarischen"
+        },
+        {
+          "id": 8,
+          "type": "collumn",
+          "label": "Text Collumns",
+          "params": {
+            "nCols": 2,
+            "boxSizes": [],
+            "rowHeight": "auto"
+          }
+        }
+      ]
     }
   ]
 }

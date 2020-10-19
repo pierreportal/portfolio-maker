@@ -9,6 +9,9 @@ export default function ModuleListItem(props) {
     boxSizes: "Grid template",
     rowHeight: "Height of rows",
     gridGap: "Gap",
+    backgroundColor: "BG Color",
+    color: "Text Color",
+    justifyContent: "justify",
   };
 
   const [savedParams, setSavedParams] = useState(elem.params);
