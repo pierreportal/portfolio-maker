@@ -36,6 +36,10 @@ const settingTemplate = {
       required: false,
     },
   ],
+  siteTitle: {
+    type: String,
+    required: true,
+  },
 };
 
 const Setting = mongoose.model("Setting", new Schema(settingTemplate));

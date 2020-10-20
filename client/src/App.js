@@ -7,13 +7,16 @@ import "./styles/specials/alice-neuville.css";
 import Dashboard from "./components/dashboard/Dashboard";
 import { BrowserRouter } from "react-router-dom";
 
-const isLoggedin = true;
-
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="App">
-        <Dashboard isLoggedin={isLoggedin} />
+        <Dashboard
+          isLoggedin={props.isLoggedin}
+          testUserSetting={props.testUserSetting}
+          user={props.user}
+          routes={props.routes}
+        />
       </div>
     </BrowserRouter>
   );

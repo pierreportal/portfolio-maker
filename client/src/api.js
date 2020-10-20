@@ -10,6 +10,19 @@ export const login = (credentials) => {
     .catch((err) => console.log(err));
 };
 
+export const getAllTemplates = () => {
+  return axios
+    .get(`/api/templates`)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
+export const getAllFeeds = () => {
+  return axios
+    .get(`/api/feeds`)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
+
 export const getTemplate = (name) => {
   return axios
     .get(`/api/template/${name}`)
@@ -23,5 +36,12 @@ export const getFeed = (feedName) => {
     .then((res) => {
       return res.data;
     })
+    .catch((err) => console.log(err));
+};
+
+export const getSettings = () => {
+  return axios
+    .get(`/api/settings`)
+    .then((res) => res.data)
     .catch((err) => console.log(err));
 };

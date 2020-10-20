@@ -6,17 +6,25 @@ import {
 import { getTemplate, getFeed } from "../../api";
 
 export default function MainPage(props) {
-  const { isLoggedin, user, testUserSetting, routes } = props;
+  const {
+    isLoggedin,
+    user,
+    testUserSetting,
+    routes,
+    feedName,
+    templateName,
+  } = props;
   // GET COMPONENTS
   const [modularTemplate, setModularTemplate] = useState([]);
   const [templateFromDB, setTemplateFromDB] = useState([]);
   const [feedFromDB, setFeedFromDB] = useState({ posts: [] });
   useEffect(() => {
-    getFeed("main").then((data) => setFeedFromDB({ posts: data }));
+    getFeed(feedName).then((data) => setFeedFromDB({ posts: data }));
   }, []);
   useEffect(() => {
-    getTemplate("mainPage").then((data) => setTemplateFromDB(data.modules));
+    getTemplate(templateName).then((data) => setTemplateFromDB(data.modules));
   }, [feedFromDB]);
+
   const buildTemplate = (modules) => {
     const list =
       modules &&

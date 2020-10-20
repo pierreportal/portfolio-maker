@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Post = require("../models/Post");
 const Setting = require("../models/Setting");
-
+const Template = require("../models/Template");
 const data = require("../client/src/fakeDB.json");
 
 // const { posts } = data.feeds[0];
@@ -30,27 +30,51 @@ mongoose
 //   },
 // ];
 
+const contactTemplate = [
+  {
+    orderIndex: 0,
+    type: "sectionTitle",
+    label: "Section Title",
+    content: "This is the second section",
+    params: { level: "3" },
+    collection: "contact",
+  },
+  {
+    orderIndex: 1,
+    type: "textComponent",
+    label: "Text Paragraph",
+    content:
+      "this is an example of long text Charles-Pierre Baudelaire war ein französischer Schriftsteller und einer der bedeutendsten Lyriker der französischen Sprache. Er ist vor allem durch seine Gedichtsammlung Les Fleurs du Mal bekannt geworden und gilt als wichtiger Wegbereiter der literarischen",
+    collection: "contact",
+  },
+  {
+    orderIndex: 2,
+    type: "textComponent",
+    label: "Text Paragraph",
+    content:
+      "this is an example of long text Charles-Pierre Baudelaire war französischen Sprache. Er ist vor allem durch seine Gedichtsammlung Les Fleurs du Mal bekannt geworden und gilt als wichtiger Wegbereiter der literarischen",
+    collection: "contact",
+  },
+  {
+    orderIndex: 3,
+    type: "collumn",
+    label: "Text Collumns",
+    params: null,
+    collection: "contact",
+  },
+];
+
 User.findOne({ userName: "admin" })
   .then((user) => {
     const set = {
       owner: user,
-      font: "helvetica",
-      bgColor: "lightgreen",
-      headMenu: false,
-      sideBar: false,
-      headingDefaultMargin: false,
-      languages: ["fr", "en"],
+      name: "contact",
+      modules: contactTemplate,
     };
 
-    Setting.deleteMany()
-      .then(() => {
-        return Setting.create(set);
-      })
+    Template.create(set)
       .then((usersCreated) => {
-        console.log(
-          `${usersCreated.length} users created with the following id:`
-        );
-        console.log(usersCreated.map((u) => u._id));
+        console.log(`${usersCreated} users created with the following id:`);
       })
       .then(() => {
         // Close properly the connection to Mongoose

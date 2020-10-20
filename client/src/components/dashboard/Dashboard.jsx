@@ -2,28 +2,24 @@ import React, { useState, useEffect } from "react";
 import HeadMenu from "./HeadMenu";
 import SideBar from "./SideBar";
 import Editor from "../editor/Editor";
-import routes from "../../routes/AN/settings.json";
-import data from "../../fakeDB.json";
 import Routing from "../Routing";
-import { getTemplate } from "../../api";
+import { getTemplate, getSettings } from "../../api";
 import {
   generateComponent,
   styledTemplateModule,
 } from "../../component-generator";
 
-const { testUserSetting, user } = data;
-
 export default function Dashboard(props) {
-  const { isLoggedin } = props;
-
+  const { isLoggedin, testUserSetting, user, routes } = props;
   // GET COMPONENTS
-  const [modularTemplate, setModularTemplate] = useState([]);
-  const [templateFromDB, setTemplateFromDB] = useState([]);
-  const [feedFromDB, setFeedFromDB] = useState(null);
+  const [modularTemplate, setModularTemplate] = useState();
+  const [templateFromDB, setTemplateFromDB] = useState();
+  const [feedFromDB, setFeedFromDB] = useState(); // No feed on daqshboard
   useEffect(() => {
-    getTemplate("constant").then((data) => setTemplateFromDB(data.modules));
-  }, []);
-
+    getSettings().then((data) => {
+      getTemplate("constant").then((data) => setTemplateFromDB(data.modules));
+    });
+  }, [props]);
   const buildTemplate = (modules) => {
     const list =
       modules &&
@@ -65,50 +61,54 @@ export default function Dashboard(props) {
       : { height: "calc(100vh - 3rem)" },
   };
   const fontStyle = {
-    style: { fontFamily: templateFont, backgroundColor: templateBgColor },
+    style: {
+      fontFamily: templateFont,
+      backgroundColor: templateBgColor,
+    },
   };
   // END DEFAULT STYLING TUNING
 
   return (
-    <div className="row fullsize containoverflow">
-      <div
-        className={`contentManager col fullsize ${
-          !headingDefaultMargin && "no-heading-margin"
-        }`}
-        {...fontStyle}
-      >
-        {addHeadMenu && <HeadMenu isLoggedin={isLoggedin} user={user} />}
-        <div className="row fullsize">
-          {addSideBar && <SideBar isLoggedin={isLoggedin} />}
+    testUserSetting && (
+      <div className="row fullsize containoverflow">
+        <div
+          className={`contentManager col fullsize ${
+            !headingDefaultMargin && "no-heading-margin"
+          }`}
+          {...fontStyle}
+        >
+          {addHeadMenu && <HeadMenu isLoggedin={isLoggedin} user={user} />}
+          <div className="row fullsize">
+            {addSideBar && <SideBar isLoggedin={isLoggedin} />}
 
-          <div className={`feed-container col`} {...fullSized}>
-            {modularTemplate}
-            <Routing
-              isLoggedin={isLoggedin}
-              user={user}
-              testUserSetting={testUserSetting}
-              routes={routes}
-            />
+            <div className={`feed-container col`} {...fullSized}>
+              {modularTemplate}
+              <Routing
+                isLoggedin={isLoggedin}
+                user={user}
+                testUserSetting={testUserSetting}
+                routes={routes}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* <Editor
-        isLoggedin={isLoggedin}
-        buildTemplate={reBuildTemplate}
-        templateModules={templateModuleList}
-        toggleSideBar={toggleSideBar}
-        sideBarState={addSideBar}
-        headMenuState={addHeadMenu}
-        toggleHeadMenu={toggleHeadMenu}
-        setFont={setFont}
-        toggleHeadingDefaultMargin={toggleHeadingDefaultMargin}
-        stateOfheadingDefaultMargin={headingDefaultMargin}
-        selectedFont={templateFont}
-        bgColorState={templateBgColor}
-        changeBgColor={changeBgColor}
-        feeds={feeds}
-      /> */}
-    </div>
+        <Editor
+          testUserSetting={testUserSetting}
+          isLoggedin={isLoggedin}
+          buildTemplate={buildTemplate}
+          toggleSideBar={toggleSideBar}
+          sideBarState={addSideBar}
+          headMenuState={addHeadMenu}
+          toggleHeadMenu={toggleHeadMenu}
+          setFont={setFont}
+          toggleHeadingDefaultMargin={toggleHeadingDefaultMargin}
+          stateOfheadingDefaultMargin={headingDefaultMargin}
+          selectedFont={templateFont}
+          bgColorState={templateBgColor}
+          changeBgColor={changeBgColor}
+        />
+      </div>
+    )
   );
 }

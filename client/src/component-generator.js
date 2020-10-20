@@ -17,7 +17,6 @@ export const generateComponent = (
   testUserSetting,
   user
 ) => {
-  console.log(feedManager);
   return module.type === "grid" && feedManager.posts ? (
     <GridTemplate
       isLoggedin={isLoggedin}

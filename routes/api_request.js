@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Template = require("../models/Template");
 const Post = require("../models/Post");
+const Setting = require("../models/Setting");
 
 router.get("/template/:name", (req, res) => {
   const { params } = req;
@@ -10,11 +11,31 @@ router.get("/template/:name", (req, res) => {
     .catch((err) => err);
 });
 
+router.get("/templates", (req, res) => {
+  Template.find()
+    .then((template) => res.json(template.data))
+    .catch((err) => err);
+});
+
 router.get("/feeds/:name", (req, res) => {
   const { params } = req;
-  console.log(params);
   Post.find({ feedName: params.name })
-    // .sort((a, b) => a.createdAt - b.createdAt)
+    .then((feed) => {
+      res.json(feed);
+    })
+    .catch((err) => err);
+});
+
+router.get("/feeds", (req, res) => {
+  Post.find()
+    .then((feed) => {
+      res.json(feed);
+    })
+    .catch((err) => err);
+});
+
+router.get("/settings", (req, res) => {
+  Setting.find()
     .then((feed) => {
       res.json(feed);
     })
