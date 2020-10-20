@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Post = require("../models/Post");
 const Setting = require("../models/Setting");
-const Template = require("../models/Template");
+
 const data = require("../client/src/fakeDB.json");
 
 // const { posts } = data.feeds[0];
@@ -69,12 +69,35 @@ User.findOne({ userName: "admin" })
     const set = {
       owner: user,
       name: "contact",
-      modules: contactTemplate,
+      bgColor: "lightgreen",
+      headMenu: false,
+      sideBar: false,
+      headingDefaultMargin: false,
+      languages: ["fr", "en"],
+      siteTitle: "Alice Neuville",
+      routes: [
+        {
+          path: "/",
+          feedName: "main",
+          templateName: "mainPage",
+        },
+        {
+          path: "/contact",
+          feedName: "contact",
+          templateName: "contact",
+        },
+      ],
     };
 
-    Template.create(set)
+    Setting.deleteMany()
+      .then(() => {
+        return Setting.create(set);
+      })
       .then((usersCreated) => {
-        console.log(`${usersCreated} users created with the following id:`);
+        console.log(
+          `${usersCreated.length} users created with the following id:`
+        );
+        console.log(usersCreated.map((u) => u._id));
       })
       .then(() => {
         // Close properly the connection to Mongoose

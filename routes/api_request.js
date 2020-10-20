@@ -3,6 +3,13 @@ const router = express.Router();
 const Template = require("../models/Template");
 const Post = require("../models/Post");
 const Setting = require("../models/Setting");
+const User = require("../models/User");
+
+router.get("/user", (req, res) => {
+  User.findOne({ userName: "admin" })
+    .then((user) => res.json(user))
+    .catch((err) => err);
+});
 
 router.get("/template/:name", (req, res) => {
   const { params } = req;
@@ -13,7 +20,7 @@ router.get("/template/:name", (req, res) => {
 
 router.get("/templates", (req, res) => {
   Template.find()
-    .then((template) => res.json(template.data))
+    .then((template) => res.json(template))
     .catch((err) => err);
 });
 

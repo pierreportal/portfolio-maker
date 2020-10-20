@@ -2,7 +2,13 @@
   font-size: 1.5rem;
   position: relative;
 }
+.switch-wrapper {
+  position: relative;
+}
 
+.switch-wrapper > div {
+  position: absolute;
+}
 .feed-container {
   width: 100%;
   overflow-y: scroll;

@@ -3,7 +3,7 @@ import HeadMenu from "./HeadMenu";
 import SideBar from "./SideBar";
 import Editor from "../editor/Editor";
 import Routing from "../Routing";
-import { getTemplate, getSettings } from "../../api";
+import { getTemplate } from "../../api";
 import {
   generateComponent,
   styledTemplateModule,
@@ -15,11 +15,11 @@ export default function Dashboard(props) {
   const [modularTemplate, setModularTemplate] = useState();
   const [templateFromDB, setTemplateFromDB] = useState();
   const [feedFromDB, setFeedFromDB] = useState(); // No feed on daqshboard
-  useEffect(() => {
-    getSettings().then((data) => {
-      getTemplate("constant").then((data) => setTemplateFromDB(data.modules));
-    });
-  }, [props]);
+  useEffect(
+    () =>
+      getTemplate("constant").then((data) => setTemplateFromDB(data.modules)),
+    []
+  );
   const buildTemplate = (modules) => {
     const list =
       modules &&

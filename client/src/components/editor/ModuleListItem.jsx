@@ -3,7 +3,6 @@ import React, { useState } from "react";
 export default function ModuleListItem(props) {
   const { elem, editModule, deleteModule } = props;
   const { type, label } = elem;
-  // console.log(elem);
 
   const tradDict = {
     nCols: "Number of columns",

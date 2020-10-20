@@ -7,47 +7,36 @@ import ColorPalette from "../UIElements/ColorPalette";
 import { NavLink } from "react-router-dom";
 import { getAllTemplates, getAllFeeds } from "../../api";
 
-// const stylizeTemplateModules = (listOfTemplates, name) => {
-//   return listOfTemplates
-//     .find((x) => x.name === name)
-//     .template.map((x) => ({
-//       ...x,
-//       style: x.style || defaultSettings[x.type].style,
-//       params: x.params || defaultSettings[x.type].params,
-//     }));
-// };
-
 export default function Editor(props) {
   const { buildTemplate, isLoggedin, testUserSetting } = props;
 
+  const stylizeTemplateModules = (listOfTemplates) => {
+    return listOfTemplates.map((x) => ({
+      ...x,
+      style: x.style || defaultSettings[x.type].style,
+      params: x.params || defaultSettings[x.type].params,
+    }));
+  };
   // GET COMPONENTS
   const [modularTemplate, setModularTemplate] = useState([]);
   const [templateFromDB, setTemplateFromDB] = useState([]);
-  const [feedFromDB, setFeedFromDB] = useState(null); // No feed on daqshboard
+  const [feedFromDB, setFeedFromDB] = useState({}); // No feed on daqshboard
 
   useEffect(() => {
     getAllFeeds().then((data) => setFeedFromDB({ posts: data }));
   }, []);
+
   useEffect(() => {
-    getAllTemplates().then((data) => setTemplateFromDB(data.modules));
+    getAllTemplates().then((data) => {
+      const dict = {};
+      data.forEach((template) => {
+        dict[template.name] = stylizeTemplateModules(template.modules);
+      });
+      setTemplateFromDB(dict);
+    });
   }, [feedFromDB]);
 
   const [isOpen, setIsOpen] = useState(false);
-
-  // const styledDashboardTemplateModuleList = stylizeTemplateModules(
-  //   templateModules,
-  //   "dashboard"
-  // );
-
-  // const styledMainTemplateModuleList = stylizeTemplateModules(
-  //   templateModules,
-  //   "main"
-  // );
-
-  // const [modules, setModules] = useState([
-  //   ...styledDashboardTemplateModuleList,
-  //   ...styledMainTemplateModuleList,
-  // ]);
 
   const [sideBarActive, setSideBarActive] = useState(props.sideBarState);
   const [headMenuActive, setHeadMenuActive] = useState(props.headMenuState);
@@ -72,50 +61,46 @@ export default function Editor(props) {
     props.toggleHeadingDefaultMargin(!headingDefaultMargin);
     setHeadingDefaultMargin(!headingDefaultMargin);
   };
-
-  // useEffect(() => buildTemplate(modules), [modules]);
-
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const listOfFeeds =
-    feedFromDB &&
-    feedFromDB.posts.map((feed) => (
-      <NavLink
-        className="manage-feed-button"
-        activeClassName="active"
-        exact
-        to={`/manager/${feed.name}`}
-      >
-        {feed.name}
-      </NavLink>
-    ));
+  // {
+  //   [name]: [modules],
+  //   [name]: [modules],
+  // }
 
-  // const editModule = (id, newParams, newStyle) => {
-  //   const editedListOfModule = [...modules].map((module) => {
-  //     return module.id === id
-  //       ? { ...module, style: { ...newStyle }, params: { ...newParams } }
-  //       : module;
-  //   });
-  //   setModules(editedListOfModule);
-  // };
-  // const deleteModule = (elem) => {
-  //   const editedListOfModule = [...modules].filter((module) => {
-  //     return module.id !== elem.id;
-  //   });
-  //   setModules(editedListOfModule);
-  // };
+  const [modules, setModules] = useState(templateFromDB);
 
-  // const listOfInsertedModules = modules.map((module) => (
-  //   <li>
-  //     <ModuleListItem
-  //       key={module.id}
-  //       elem={module}
-  //       editModule={editModule}
-  //       deleteModule={deleteModule}
-  //     />
-  //   </li>
-  // ));
+  const editModule = (id, newParams, newStyle) => {
+    const editedListOfModule = [...modules].map((module) => {
+      return module.id === id
+        ? { ...module, style: { ...newStyle }, params: { ...newParams } }
+        : module;
+    });
+    setModules(editedListOfModule);
+  };
+  const deleteModule = (elem) => {
+    const editedListOfModule = [...modules].filter((module) => {
+      return module.id !== elem.id;
+    });
+    setModules(editedListOfModule);
+  };
 
+  const listOfInsertedModules = Object.entries(templateFromDB).map((obj) => {
+    const [name, modules] = obj;
+    return {
+      templateName: name,
+      modulesList: [...modules].map((module) => (
+        <li>
+          <ModuleListItem
+            key={module.orderIndex}
+            elem={module}
+            editModule={editModule}
+            deleteModule={deleteModule}
+          />
+        </li>
+      )),
+    };
+  });
   const setFont = (font) => props.setFont(font);
 
   const savedHeadMenuStyle = {
@@ -132,6 +117,26 @@ export default function Editor(props) {
         {k}: <input type="text" value={savedHeadMenuStyle[k]} name={k} />
       </li>
     ));
+  // useEffect(() => buildTemplate(modules), [modules]);
+
+  // return <h1>HH</h1>;
+
+  // {
+  //   posts: [posts]
+  // }
+
+  // const listOfFeeds =
+  //   feedFromDB.posts &&
+  //   feedFromDB.posts.map((feed) => (
+  //     <NavLink
+  //       className="manage-feed-button"
+  //       activeClassName="active"
+  //       exact
+  //       to={`/manager/${feed.feedName}`}
+  //     >
+  //       {feed.feedName}
+  //     </NavLink>
+  //   ));
 
   return (
     <>
@@ -141,7 +146,7 @@ export default function Editor(props) {
             {isOpen ? "close" : "edit"}
           </button>
 
-          {/* <div className="editor-settings-container col">
+          <div className="editor-settings-container col">
             <h4>general styling</h4>
             <ColorPalette
               options={[
@@ -203,18 +208,27 @@ export default function Editor(props) {
             </div>
 
             <h4>manage feeds</h4>
-            {listOfFeeds}
+            {/* {listOfFeeds} */}
             <button className="add-new-module-in-lidt-button">
               Create a new feed
             </button>
             <h4>main content template</h4>
             <ul>
-              {listOfInsertedModules}
+              {listOfInsertedModules.length &&
+                listOfInsertedModules.map((M) => {
+                  return (
+                    <>
+                      <h4>{M.templateName}</h4>
+                      {M.modulesList}
+                    </>
+                  );
+                })}
+
               <li className="add-new-module-in-lidt-button">
                 add another module
               </li>
             </ul>
-          </div> */}
+          </div>
         </div>
       )}
     </>

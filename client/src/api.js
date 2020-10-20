@@ -1,11 +1,17 @@
 import axios from "axios";
 
+export const getUser = () => {
+  return axios
+    .get("/api/user")
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
+
 export const login = (credentials) => {
   axios
     .post("/auth/login", { ...credentials })
     .then((response) => {
       console.log(response.data);
-      // setUser(response.data);
     })
     .catch((err) => console.log(err));
 };

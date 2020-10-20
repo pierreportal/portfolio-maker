@@ -40,6 +40,11 @@ const settingTemplate = {
     type: String,
     required: true,
   },
+  routes: [
+    {
+      type: Schema.Types.Mixed,
+    },
+  ],
 };
 
 const Setting = mongoose.model("Setting", new Schema(settingTemplate));
