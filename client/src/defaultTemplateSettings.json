@@ -1,13 +1,16 @@
 {
-  "style": {
-    "floatHeader": {
+  "floatHeader": {
+    "style": {
       "width": "90%",
       "justifyContent": "space-between",
       "padding": "0",
       "fontSize": "4rem",
       "margin": "0 auto"
-    },
-    "sectionTitle": {
+    }
+  },
+
+  "sectionTitle": {
+    "style": {
       "width": "90%",
       "padding": "1rem 0",
       "textAlign": "left",
@@ -16,25 +19,50 @@
       "backgroundColor": "transparent",
       "color": "black"
     },
-    "textComponent": {
+    "params": { "level": "2" }
+  },
+
+  "textComponent": {
+    "style": {
       "width": "90%",
       "padding": "1rem 0",
       "textAlign": "left",
       "margin": "0 auto"
     },
-    "grid": {
+    "params": {}
+  },
+
+  "grid": {
+    "style": {
       "padding": "0",
       "gridGap": "0rem",
       "width": "100%",
       "margin": "0 auto"
     },
-    "collumn": {
+    "params": {
+      "nCols": 2,
+      "boxSizes": [],
+      "rowHeight": "auto"
+    }
+  },
+
+  "collumn": {
+    "style": {
       "padding": "0",
       "gridGap": "0rem",
       "width": "100%",
       "margin": "0 auto"
     },
-    "aliceRollMenu": {
+    "params": {
+      "feed": null,
+      "nCols": 2,
+      "boxSizes": [],
+      "rowHeight": "auto"
+    }
+  },
+
+  "aliceRollMenu": {
+    "style": {
       "width": "100vw",
       "height": "3rem",
       "justifyContent": "center",

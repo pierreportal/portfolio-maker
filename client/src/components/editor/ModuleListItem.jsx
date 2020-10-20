@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function ModuleListItem(props) {
   const { elem, editModule, deleteModule } = props;
   const { type, label } = elem;
+  // console.log(elem);
 
   const tradDict = {
     nCols: "Number of columns",
@@ -91,7 +92,10 @@ export default function ModuleListItem(props) {
 
   return (
     <>
-      <div className="module-list-item" style={{ color: colorDisct[type] }}>
+      <div
+        className={`module-list-item ${elem.special ? "special" : ""}`}
+        style={{ color: colorDisct[type] }}
+      >
         <button onClick={displaySettings}>s</button>
         {label}
         <button

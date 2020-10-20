@@ -1,14 +1,41 @@
 import React, { useState, useEffect } from "react";
+import defaultSettings from "../../defaultTemplateSettings.json";
 import ModuleListItem from "./ModuleListItem";
 import Switch from "../UIElements/Switch";
 import Dropdown from "../UIElements/Dropdown";
-import Input from "../UIElements/Input";
+import ColorPalette from "../UIElements/ColorPalette";
+import { NavLink } from "react-router-dom";
 
-export default function SideBar(props) {
-  const { buildTemplate, isLoggedin, templateModules } = props;
+const stylizeTemplateModules = (listOfTemplates, name) => {
+  return listOfTemplates
+    .find((x) => x.name === name)
+    .template.map((x) => ({
+      ...x,
+      style: x.style || defaultSettings[x.type].style,
+      params: x.params || defaultSettings[x.type].params,
+    }));
+};
+
+export default function Editor(props) {
+  const { buildTemplate, isLoggedin, templateModules, feeds } = props;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [modules, setModules] = useState(templateModules);
+
+  const styledDashboardTemplateModuleList = stylizeTemplateModules(
+    templateModules,
+    "dashboard"
+  );
+
+  const styledMainTemplateModuleList = stylizeTemplateModules(
+    templateModules,
+    "main"
+  );
+
+  const [modules, setModules] = useState([
+    ...styledDashboardTemplateModuleList,
+    ...styledMainTemplateModuleList,
+  ]);
+
   const [sideBarActive, setSideBarActive] = useState(props.sideBarState);
   const [headMenuActive, setHeadMenuActive] = useState(props.headMenuState);
   const [bgColor, setBgColor] = useState(props.bgColorState);
@@ -37,6 +64,17 @@ export default function SideBar(props) {
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
+  const listOfFeeds = feeds.map((feed) => (
+    <NavLink
+      className="manage-feed-button"
+      activeClassName="active"
+      exact
+      to={`/manager/${feed.name}`}
+    >
+      {feed.name}
+    </NavLink>
+  ));
+
   const editModule = (id, newParams, newStyle) => {
     const editedListOfModule = [...modules].map((module) => {
       return module.id === id
@@ -62,8 +100,6 @@ export default function SideBar(props) {
       />
     </li>
   ));
-
-  //   const toggleDarkTheme = () => {};
 
   const setFont = (font) => props.setFont(font);
 
@@ -93,11 +129,29 @@ export default function SideBar(props) {
           <div className="editor-settings-container col">
             {/* MAIN STYLE */}
             <h4>general styling</h4>
-
-            <Input value={bgColor} label={"BG Color"} action={changeBgColor} />
-
+            <ColorPalette
+              options={[
+                "lightgreen",
+                "blue",
+                "yellow",
+                "white",
+                "red",
+                "pink",
+                "coral",
+              ]}
+              label={"BG Color"}
+              selectedOption={bgColor}
+              action={changeBgColor}
+            />
             <Dropdown
-              options={["arial", "helvetica", "courier", "futura", "impact"]}
+              options={[
+                "arial",
+                "helvetica",
+                "courier",
+                "futura",
+                "impact",
+                "times",
+              ]}
               label={"font"}
               selectedOption={props.selectedFont}
               action={setFont}
@@ -137,7 +191,7 @@ export default function SideBar(props) {
 
             {/* FEED */}
             <h4>manage feeds</h4>
-            {/* <p>You don't have any feed settup yet.</p> */}
+            {listOfFeeds}
             <button className="add-new-module-in-lidt-button">
               Create a new feed
             </button>

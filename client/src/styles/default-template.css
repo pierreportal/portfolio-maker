@@ -58,7 +58,12 @@
 .no-heading-margin h3,
 .no-heading-margin h4,
 .no-heading-margin h5,
+.no-heading-margin p,
 .no-heading-margin h6 {
   margin: 0;
   padding: 0;
+}
+
+.containoverflow {
+  overflow: hidden;
 }

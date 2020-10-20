@@ -6,6 +6,8 @@ export default function PostTemplate(props) {
   const colIndex = `${col}/${width}`;
   const rowIndex = `${row}/${height}`;
 
+  const handleClickOnVideo = (e) => {};
+
   return (
     <div
       className={post.img ? `dashboard-post` : `dashboard-text`}
@@ -21,12 +23,29 @@ export default function PostTemplate(props) {
           style={{ backgroundImage: `url(${post.img})` }}
         ></div>
       )}
-      {post.title && (
-        <div className="text">
-          <h2>
-            {post.title} ~ {index}
-          </h2>
-          {!post.img && <p>{post.content}</p>}
+      {post.video && (
+        <div className="post-img ">
+          {/* className="" */}
+          {post.title && (
+            <div className="text on-video col" onClick={handleClickOnVideo}>
+              <h2>{post.title}</h2>
+              <p>{post.content}</p>
+            </div>
+          )}
+          <iframe
+            width="100%"
+            height="100%"
+            src={post.video}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
+      {!post.video && post.title && (
+        <div className="text col">
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
         </div>
       )}
     </div>

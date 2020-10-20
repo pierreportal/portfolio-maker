@@ -11,6 +11,10 @@ const userTemplate = {
     required: true,
     minlength: 8,
   },
+  name: {
+    type: String,
+    required: true,
+  },
 };
 
 const User = mongoose.model("User", new Schema(userTemplate));

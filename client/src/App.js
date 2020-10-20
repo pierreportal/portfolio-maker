@@ -5,15 +5,17 @@ import "./styles/editor.css";
 import "./styles/default-template.css";
 import "./styles/specials/alice-neuville.css";
 import Dashboard from "./components/dashboard/Dashboard";
-// import Login from "./components/Login";
+import { BrowserRouter } from "react-router-dom";
 
 const isLoggedin = true;
 
 function App() {
   return (
-    <div className="App">
-      <Dashboard isLoggedin={isLoggedin} />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Dashboard isLoggedin={isLoggedin} />
+      </div>
+    </BrowserRouter>
   );
 }
 

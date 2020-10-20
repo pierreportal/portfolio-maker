@@ -31,3 +31,8 @@
     border: solid 1px red;
     margin-top: -2.4rem;
   } */
+
+a {
+  text-decoration: none;
+  color: black;
+}

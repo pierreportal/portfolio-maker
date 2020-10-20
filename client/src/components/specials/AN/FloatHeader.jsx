@@ -1,15 +1,30 @@
 import React, { useState } from "react";
+import Navigation from "../../Navigation";
 
 export default function FloatHeader(props) {
   const [openMenu, setOpenMenu] = useState(false);
   const handleClick = () => setOpenMenu(!openMenu);
-  const { style, navigationRoutes } = props;
-  const navLabels = navigationRoutes.map((x) => <li key={x}>{x.label}</li>);
+
+  const { style, navigationRoutes, user, languages } = props;
+
+  // const navLabels = navigationRoutes.map((x) => <li key={x}>{x.label}</li>);
+
+  const [language, setLanguage] = useState(navigator.language);
+
+  const langs = languages.map((l) =>
+    l === language ? (
+      <span className="selectedLanguage">{l}</span>
+    ) : (
+      <span className="non-selectedLanguage">{l}</span>
+    )
+  );
+
   return (
     <>
       <div className="col" style={{ width: style.width, margin: style.margin }}>
         <div className="floatHeader row" style={style}>
-          <div>ALICE NEUVILLE</div>
+          <div className="logo"></div>
+
           <div className="menu-button" onClick={handleClick}>
             {openMenu ? "CLOSE" : "MENU"}
           </div>
@@ -17,8 +32,8 @@ export default function FloatHeader(props) {
         {openMenu && (
           <div className="floatHeader menu">
             <ul>
-              {navLabels}
-              <li>fr/en</li>
+              <Navigation navigationRoutes={navigationRoutes} />
+              <li>{langs}</li>
             </ul>
           </div>
         )}

@@ -54,6 +54,11 @@
   cursor: grab;
 }
 
+.module-list-item.special {
+  background-color: aquamarine;
+  color: rgb(127, 127, 127);
+}
+
 .module-list-item:hover {
   background-color: white;
 }
@@ -299,4 +304,67 @@
 
 .editor-button-dropdown-item.selected {
   background-color: white;
+}
+
+.editor-colorpalette-component {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.editor-button-colorpalette-label {
+  font-variant: small-caps;
+  color: rgb(127, 127, 127);
+}
+
+.editor-button-colorpalette-container {
+  position: relative;
+  background-color: transparent;
+  color: rgb(127, 127, 127);
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  /* border: solid 2px rgb(127, 127, 127); */
+  border-radius: 50%;
+}
+
+.editor-button-colorpalette-list {
+  position: absolute;
+  top: 2.3rem;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  background-color: transparent;
+  width: calc(4 * 2rem);
+  right: 0rem;
+  z-index: 99999;
+}
+
+.editor-button-colorpalette-item {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  /* border-radius: 50%; */
+  /* border: solid 2px #ddd; */
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-button-colorpalette-item.selected {
+  background-color: white;
+}
+
+.manage-feed-button {
+  width: 100%;
+  background-color: #eee;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  font-variant: small-caps;
+  color: rgb(127, 127, 127);
 }

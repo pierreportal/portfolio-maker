@@ -1,6 +1,10 @@
 {
   "headMenu": [
     {
+      "label": "home",
+      "url": "/"
+    },
+    {
       "label": "decors",
       "url": "/decors"
     },

@@ -41,6 +41,12 @@ app.use(
 const index = require("./routes/index");
 app.use("/", index);
 
+// const auth = require("./routes/auth");
+// app.use("/auth", auth);
+
+const api = require("./routes/api_request");
+app.use("/api", api);
+
 module.exports = app;
 
 app.listen(5555, () => console.log("listening......"));

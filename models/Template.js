@@ -6,6 +6,11 @@ const templateTemplate = {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  name: {
+    type: String,
+    required: true,
+  },
+
   modules: [
     {
       type: Schema.Types.Mixed,

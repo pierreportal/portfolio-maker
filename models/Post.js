@@ -19,12 +19,16 @@ const postTemplate = {
     required: false,
   },
   img: {
-    type: Schema.Types.Mixed,
+    type: String,
     required: false,
   },
-  media: {
-    type: Schema.Types.Mixed,
+  video: {
+    type: String,
     required: false,
+  },
+  createdAt: {
+    type: Date,
+    required: true,
   },
 };
 
