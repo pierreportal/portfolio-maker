@@ -5,7 +5,7 @@ export default function FloatHeader(props) {
   const [openMenu, setOpenMenu] = useState(false);
   const handleClick = () => setOpenMenu(!openMenu);
 
-  const { style, navigationRoutes, user, languages } = props;
+  const { style, languages } = props;
 
   // const navLabels = navigationRoutes.map((x) => <li key={x}>{x.label}</li>);
 
@@ -32,7 +32,7 @@ export default function FloatHeader(props) {
         {openMenu && (
           <div className="floatHeader menu">
             <ul>
-              <Navigation navigationRoutes={navigationRoutes} />
+              <Navigation testUserSetting={props.testUserSetting} />
               <li>{langs}</li>
             </ul>
           </div>

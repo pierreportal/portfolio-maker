@@ -55,7 +55,8 @@ export const generateComponent = (
       isLoggedin={isLoggedin}
       key={i}
       style={module.style}
-      navigationRoutes={"headMenu"}
+      testUserSetting={testUserSetting}
+      // navigationRoutes={"headMenu"}
       languages={testUserSetting.languages}
       user={user}
     />

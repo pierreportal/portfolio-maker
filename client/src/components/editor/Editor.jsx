@@ -10,6 +10,16 @@ import { getAllTemplates, getAllFeeds } from "../../api";
 export default function Editor(props) {
   const { buildTemplate, isLoggedin, testUserSetting } = props;
 
+  const {
+    routes,
+    headMenu,
+    sidebar,
+    headingDefaultMargin,
+    bgColor,
+    siteTitle,
+    font,
+  } = testUserSetting;
+
   const stylizeTemplateModules = (listOfTemplates) => {
     return listOfTemplates.map((x) => ({
       ...x,
@@ -18,9 +28,8 @@ export default function Editor(props) {
     }));
   };
   // GET COMPONENTS
-  const [modularTemplate, setModularTemplate] = useState([]);
   const [templateFromDB, setTemplateFromDB] = useState([]);
-  const [feedFromDB, setFeedFromDB] = useState({}); // No feed on daqshboard
+  const [feedFromDB, setFeedFromDB] = useState({});
 
   useEffect(() => {
     getAllFeeds().then((data) => setFeedFromDB({ posts: data }));
@@ -38,11 +47,11 @@ export default function Editor(props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [sideBarActive, setSideBarActive] = useState(props.sideBarState);
-  const [headMenuActive, setHeadMenuActive] = useState(props.headMenuState);
-  const [bgColor, setBgColor] = useState(props.bgColorState);
-  const [headingDefaultMargin, setHeadingDefaultMargin] = useState(
-    props.stateOfheadingDefaultMargin
+  const [sideBarActive, setSideBarActive] = useState(sidebar);
+  const [headMenuActive, setHeadMenuActive] = useState(headMenu);
+  const [stateBgColor, setBgColor] = useState(bgColor);
+  const [stateHeadingDefaultMargin, setHeadingDefaultMargin] = useState(
+    headingDefaultMargin
   );
 
   const changeBgColor = (color) => {
@@ -58,8 +67,8 @@ export default function Editor(props) {
     setSideBarActive(!sideBarActive);
   };
   const toggleHeadingDefaultMargin = () => {
-    props.toggleHeadingDefaultMargin(!headingDefaultMargin);
-    setHeadingDefaultMargin(!headingDefaultMargin);
+    props.toggleHeadingDefaultMargin(!stateHeadingDefaultMargin);
+    setHeadingDefaultMargin(!stateHeadingDefaultMargin);
   };
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -68,21 +77,21 @@ export default function Editor(props) {
   //   [name]: [modules],
   // }
 
-  const [modules, setModules] = useState(templateFromDB);
+  // const [modules, setModules] = useState(templateFromDB);
 
   const editModule = (id, newParams, newStyle) => {
-    const editedListOfModule = [...modules].map((module) => {
+    const editedListOfModule = [...templateFromDB].map((module) => {
       return module.id === id
         ? { ...module, style: { ...newStyle }, params: { ...newParams } }
         : module;
     });
-    setModules(editedListOfModule);
+    // setModules(editedListOfModule);
   };
   const deleteModule = (elem) => {
-    const editedListOfModule = [...modules].filter((module) => {
+    const editedListOfModule = [...templateFromDB].filter((module) => {
       return module.id !== elem.id;
     });
-    setModules(editedListOfModule);
+    // setModules(editedListOfModule);
   };
 
   const listOfInsertedModules = Object.entries(templateFromDB).map((obj) => {
@@ -101,42 +110,19 @@ export default function Editor(props) {
       )),
     };
   });
+
+  const TEMPLATES =
+    listOfInsertedModules.length &&
+    listOfInsertedModules.map((M) => {
+      return (
+        <>
+          <h4>{M.templateName}</h4>
+          <ul>{M.modulesList}</ul>
+        </>
+      );
+    });
+
   const setFont = (font) => props.setFont(font);
-
-  const savedHeadMenuStyle = {
-    textAlign: "left",
-    justifyContent: "space-between",
-    background: true,
-    backgroundColor: "#fff",
-  };
-
-  const headMenuStylePanel =
-    savedHeadMenuStyle &&
-    Object.keys(savedHeadMenuStyle).map((k) => (
-      <li>
-        {k}: <input type="text" value={savedHeadMenuStyle[k]} name={k} />
-      </li>
-    ));
-  // useEffect(() => buildTemplate(modules), [modules]);
-
-  // return <h1>HH</h1>;
-
-  // {
-  //   posts: [posts]
-  // }
-
-  // const listOfFeeds =
-  //   feedFromDB.posts &&
-  //   feedFromDB.posts.map((feed) => (
-  //     <NavLink
-  //       className="manage-feed-button"
-  //       activeClassName="active"
-  //       exact
-  //       to={`/manager/${feed.feedName}`}
-  //     >
-  //       {feed.feedName}
-  //     </NavLink>
-  //   ));
 
   return (
     <>
@@ -149,41 +135,24 @@ export default function Editor(props) {
           <div className="editor-settings-container col">
             <h4>general styling</h4>
             <ColorPalette
-              options={[
-                "lightgreen",
-                "blue",
-                "yellow",
-                "white",
-                "red",
-                "pink",
-                "coral",
-              ]}
+              options={defaultSettings.availableColors}
               label={"BG Color"}
-              selectedOption={bgColor}
+              selectedOption={stateBgColor}
               action={changeBgColor}
             />
             <Dropdown
-              options={[
-                "arial",
-                "helvetica",
-                "courier",
-                "futura",
-                "impact",
-                "times",
-              ]}
+              options={defaultSettings.availableFonts}
               label={"font"}
-              selectedOption={props.selectedFont}
+              selectedOption={font}
               action={setFont}
             />
-
             <Switch
-              activate={headingDefaultMargin}
+              activate={stateHeadingDefaultMargin}
               action={toggleHeadingDefaultMargin}
               label={"Heading default margin"}
             />
 
             <h4>navigation</h4>
-
             <div className="row">
               <Switch
                 activate={headMenuActive}
@@ -191,14 +160,6 @@ export default function Editor(props) {
                 label={"Header menu"}
               />
             </div>
-            {headMenuActive && (
-              <>
-                <div className={`module-list-item-settings`}>
-                  <ul className="settings-list">{headMenuStylePanel}</ul>
-                </div>
-              </>
-            )}
-
             <div className="row">
               <Switch
                 activate={sideBarActive}
@@ -208,26 +169,14 @@ export default function Editor(props) {
             </div>
 
             <h4>manage feeds</h4>
-            {/* {listOfFeeds} */}
             <button className="add-new-module-in-lidt-button">
               Create a new feed
             </button>
             <h4>main content template</h4>
-            <ul>
-              {listOfInsertedModules.length &&
-                listOfInsertedModules.map((M) => {
-                  return (
-                    <>
-                      <h4>{M.templateName}</h4>
-                      {M.modulesList}
-                    </>
-                  );
-                })}
-
-              <li className="add-new-module-in-lidt-button">
-                add another module
-              </li>
-            </ul>
+            {TEMPLATES}
+            <div className="add-new-module-in-lidt-button">
+              add another module
+            </div>
           </div>
         </div>
       )}

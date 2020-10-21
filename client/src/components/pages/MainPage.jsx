@@ -4,6 +4,7 @@ import {
   styledTemplateModule,
 } from "../../component-generator";
 import { getTemplate, getFeed } from "../../api";
+// import ReactTransitionGroup from "react-addons-transition-group";
 
 export default function MainPage(props) {
   const {
@@ -25,6 +26,11 @@ export default function MainPage(props) {
     getTemplate(templateName).then((data) => setTemplateFromDB(data.modules));
   }, [feedFromDB]);
 
+  // function FirstChild(props) {
+  //   const childrenArray = React.Children.toArray(props.children);
+  //   return childrenArray[0] || null;
+  // }
+
   const buildTemplate = (modules) => {
     const list =
       modules &&
@@ -45,5 +51,11 @@ export default function MainPage(props) {
   useEffect(() => buildTemplate(templateFromDB), [templateFromDB]);
   // END GET COMPONENTS
 
-  return <>{modularTemplate}</>;
+  return (
+    <>
+      {/* <ReactTransitionGroup component={FirstChild}> */}
+      {modularTemplate}
+      {/* </ReactTransitionGroup> */}
+    </>
+  );
 }

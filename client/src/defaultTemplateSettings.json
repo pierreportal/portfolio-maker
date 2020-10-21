@@ -1,4 +1,21 @@
 {
+  "availableColors": [
+    "lightgreen",
+    "blue",
+    "yellow",
+    "white",
+    "red",
+    "pink",
+    "coral"
+  ],
+  "availableFonts": [
+    "arial",
+    "helvetica",
+    "courier",
+    "futura",
+    "impact",
+    "times"
+  ],
   "floatHeader": {
     "style": {
       "width": "90%",

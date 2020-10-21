@@ -98,14 +98,9 @@ export default function Dashboard(props) {
           isLoggedin={isLoggedin}
           buildTemplate={buildTemplate}
           toggleSideBar={toggleSideBar}
-          sideBarState={addSideBar}
-          headMenuState={addHeadMenu}
           toggleHeadMenu={toggleHeadMenu}
           setFont={setFont}
           toggleHeadingDefaultMargin={toggleHeadingDefaultMargin}
-          stateOfheadingDefaultMargin={headingDefaultMargin}
-          selectedFont={templateFont}
-          bgColorState={templateBgColor}
           changeBgColor={changeBgColor}
         />
       </div>

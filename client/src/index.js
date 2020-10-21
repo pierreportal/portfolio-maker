@@ -6,10 +6,11 @@ import * as serviceWorker from "./serviceWorker";
 
 import { getSettings, getUser } from "./api";
 
-const isLoggedin = true;
+const isLoggedin = false;
 
 getUser().then((user) => {
   getSettings().then((data) => {
+    document.title = data[0].siteTitle;
     ReactDOM.render(
       <React.StrictMode>
         <App
