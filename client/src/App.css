@@ -36,3 +36,79 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.testHOverScale {
+  margin-bottom: 0;
+  transition: margin 0.1s ease;
+  border-bottom: dashed 0px rgb(127, 127, 127);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.testHOverScale:hover {
+  border-bottom: dashed 1px rgb(127, 127, 127);
+  /* border-radius: 0.3rem; */
+  cursor: pointer;
+}
+
+.testHOverScale:hover::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(225, 225, 225, 0.3);
+}
+/* 
+.insert-module-after {
+  display: none;
+  width: auto;
+  padding: 0.3rem;
+  left: calc(50% - 1rem);
+  text-align: center;
+  position: absolute;
+  background-color: #eee;
+  z-index: 99999;
+  color: rgb(127, 127, 127);
+  border: solid 1px rgb(127, 127, 127);
+  opacity: 1;
+  transform: rotate(0deg);
+  transition: all 0.2s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.insert-module-after:hover {
+  opacity: 1;
+}
+
+.insert-module-after {
+  top: 0;
+}
+
+.insert-module-after.close {
+  width: 20rem;
+  height: 3rem;
+  border-radius: 0;
+  left: calc(50% - 10rem);
+  text-align: left;
+}
+
+.testHOverScale:hover > .insert-module-after {
+  display: flex;
+
+}
+
+.insert-module-after > div {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+}
+
+.insert-module-after > div:last-of-type {
+} */

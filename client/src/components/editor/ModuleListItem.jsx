@@ -18,7 +18,7 @@ export default function ModuleListItem(props) {
   const [savedStyle, setSavedStyle] = useState(elem.style);
 
   const modify = () => {
-    editModule(elem.id, savedParams, savedStyle);
+    editModule(elem, savedParams, savedStyle);
   };
   const handleStyleChange = (e) => {
     const { name, value } = e.target;

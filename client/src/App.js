@@ -4,6 +4,7 @@ import "./styles/grid-display.css";
 import "./styles/editor.css";
 import "./styles/default-template.css";
 import "./styles/specials/alice-neuville.css";
+import "./styles/feed-manager.css";
 import Dashboard from "./components/dashboard/Dashboard";
 import { BrowserRouter } from "react-router-dom";
 

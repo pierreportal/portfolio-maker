@@ -51,3 +51,7 @@ export const getSettings = () => {
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
+
+export const editTemplateModule = () => {};
+
+export const deleteTemplateModule = () => {};

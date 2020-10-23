@@ -29,10 +29,8 @@ export default function TextGridTemplate(props) {
           height: params.rowHight,
         }}
       >
-        {!!heading && <h4 contentEditable={isLoggedin}>This is a heading</h4>}
-        {!!content && (
-          <p contentEditable={isLoggedin}>This is the content...</p>
-        )}
+        {!!heading && <h4>This is a heading</h4>}
+        {!!content && <p>This is the content...</p>}
       </div>
     );
   });

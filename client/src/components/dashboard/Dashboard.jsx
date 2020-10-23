@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HeadMenu from "./HeadMenu";
 import SideBar from "./SideBar";
-import Editor from "../editor/Editor";
+// import Editor from "../editor/Editor";
 import Routing from "../Routing";
 import { getTemplate } from "../../api";
 import {
@@ -29,7 +29,6 @@ export default function Dashboard(props) {
           isLoggedin,
           styledTemplateModule(module),
           feedFromDB,
-          routes,
           testUserSetting,
           user
         );
@@ -49,12 +48,7 @@ export default function Dashboard(props) {
   const [headingDefaultMargin, setHeadingDefaultMargin] = useState(
     testUserSetting.headingDefaultMargin
   );
-  const changeBgColor = (color) => setTemplateBgColor(color);
-  const setFont = (font) => setTemplateFont(font);
-  const toggleSideBar = () => setAddSideBar(!addSideBar);
-  const toggleHeadMenu = () => setAddHeadMenu(!addHeadMenu);
-  const toggleHeadingDefaultMargin = () =>
-    setHeadingDefaultMargin(!headingDefaultMargin);
+
   const fullSized = {
     style: !addHeadMenu
       ? { height: "100vh" }
@@ -93,7 +87,7 @@ export default function Dashboard(props) {
           </div>
         </div>
 
-        <Editor
+        {/* <Editor
           testUserSetting={testUserSetting}
           isLoggedin={isLoggedin}
           buildTemplate={buildTemplate}
@@ -102,7 +96,7 @@ export default function Dashboard(props) {
           setFont={setFont}
           toggleHeadingDefaultMargin={toggleHeadingDefaultMargin}
           changeBgColor={changeBgColor}
-        />
+        /> */}
       </div>
     )
   );

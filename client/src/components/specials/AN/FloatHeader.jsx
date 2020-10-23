@@ -7,8 +7,6 @@ export default function FloatHeader(props) {
 
   const { style, languages } = props;
 
-  // const navLabels = navigationRoutes.map((x) => <li key={x}>{x.label}</li>);
-
   const [language, setLanguage] = useState(navigator.language);
 
   const langs = languages.map((l) =>

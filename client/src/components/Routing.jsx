@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import FeedManager from "./pages/FeedManager";
 import { AnimatedSwitch } from "react-router-transition";
 
 export default function Routing(props) {
@@ -23,7 +24,6 @@ export default function Routing(props) {
                   isLoggedin={isLoggedin}
                   user={user}
                   testUserSetting={testUserSetting}
-                  routes={routes}
                   feedName={r.feedName}
                   templateName={r.templateName}
                 />
@@ -31,6 +31,17 @@ export default function Routing(props) {
             />
           );
         })}
+        <Route
+          exact={true}
+          path={"/feed-manager"}
+          component={() => (
+            <FeedManager
+              isLoggedin={isLoggedin}
+              user={user}
+              estUserSetting={testUserSetting}
+            />
+          )}
+        />
       </AnimatedSwitch>
     </Switch>
   );

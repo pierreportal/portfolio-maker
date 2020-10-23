@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import { getSettings, getUser } from "./api";
 
-const isLoggedin = false;
+const isLoggedin = true;
 
 getUser().then((user) => {
   getSettings().then((data) => {

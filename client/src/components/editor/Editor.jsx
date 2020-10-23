@@ -5,7 +5,14 @@ import Switch from "../UIElements/Switch";
 import Dropdown from "../UIElements/Dropdown";
 import ColorPalette from "../UIElements/ColorPalette";
 import { NavLink } from "react-router-dom";
-import { getAllTemplates, getAllFeeds } from "../../api";
+import {
+  getAllTemplates,
+  getAllFeeds,
+  editTemplateModule,
+  deleteTemplateModule,
+} from "../../api";
+
+const ALLOW_HEADER_AND_SIDEBAR = false;
 
 export default function Editor(props) {
   const { buildTemplate, isLoggedin, testUserSetting } = props;
@@ -79,18 +86,30 @@ export default function Editor(props) {
 
   // const [modules, setModules] = useState(templateFromDB);
 
-  const editModule = (id, newParams, newStyle) => {
-    const editedListOfModule = [...templateFromDB].map((module) => {
-      return module.id === id
-        ? { ...module, style: { ...newStyle }, params: { ...newParams } }
+  const editModule = (elem, newParams, newStyle) => {
+    console.log("editModule -> elem", elem);
+    console.log("editModule -> newStyle", newStyle);
+    console.log("editModule -> newParams", newParams);
+    console.log(templateFromDB[elem.collection]);
+    const editedTemplateList = templateFromDB[elem.collection].map((module) => {
+      return module.id === elem.id
+        ? { ...elem, style: newStyle, params: newParams }
         : module;
     });
-    // setModules(editedListOfModule);
+    setTemplateFromDB({
+      ...templateFromDB,
+      [elem.collection]: editedTemplateList,
+    });
+    buildTemplate();
+
+    // editTemplateModule(elem, newParams, newStyle);
   };
   const deleteModule = (elem) => {
-    const editedListOfModule = [...templateFromDB].filter((module) => {
-      return module.id !== elem.id;
-    });
+    console.log("deleteModule -> elem", elem);
+    console.log(templateFromDB[elem.collection]);
+    // const editedListOfModule = [...templateFromDB].filter((module) => {
+    //   return module.id !== elem.id;
+    // });
     // setModules(editedListOfModule);
   };
 
@@ -118,11 +137,22 @@ export default function Editor(props) {
         <>
           <h4>{M.templateName}</h4>
           <ul>{M.modulesList}</ul>
+          <div className="add-new-module-in-lidt-button">
+            add another module
+          </div>
         </>
       );
     });
 
   const setFont = (font) => props.setFont(font);
+
+  const routeMapping = routes.map((route) => {
+    return (
+      <NavLink exact to={route.path}>
+        {route.label}
+      </NavLink>
+    );
+  });
 
   return (
     <>
@@ -153,30 +183,42 @@ export default function Editor(props) {
             />
 
             <h4>navigation</h4>
-            <div className="row">
-              <Switch
-                activate={headMenuActive}
-                action={toggleHeadMenu}
-                label={"Header menu"}
-              />
-            </div>
-            <div className="row">
-              <Switch
-                activate={sideBarActive}
-                action={toggleSideBar}
-                label={"Sidebar"}
-              />
+
+            {ALLOW_HEADER_AND_SIDEBAR && (
+              <>
+                <div className="row">
+                  <Switch
+                    activate={headMenuActive}
+                    action={toggleHeadMenu}
+                    label={"Header menu"}
+                  />
+                </div>
+                <div className="row">
+                  <Switch
+                    activate={sideBarActive}
+                    action={toggleSideBar}
+                    label={"Sidebar"}
+                  />
+                </div>
+              </>
+            )}
+
+            <div className="col">
+              {routeMapping}
+              <div className="add-new-module-in-lidt-button">
+                add another page
+              </div>
             </div>
 
             <h4>manage feeds</h4>
+            <NavLink exact to={"/feed-manager"}>
+              Manage feeds
+            </NavLink>
             <button className="add-new-module-in-lidt-button">
               Create a new feed
             </button>
             <h4>main content template</h4>
             {TEMPLATES}
-            <div className="add-new-module-in-lidt-button">
-              add another module
-            </div>
           </div>
         </div>
       )}

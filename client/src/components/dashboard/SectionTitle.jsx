@@ -24,17 +24,11 @@ export default function SectionTitle(props) {
 
   const heading =
     params.level === "1" ? (
-      <h1 contentEditable={isLoggedin} style={headerStyling}>
-        {content}
-      </h1>
+      <h1 style={headerStyling}>{content}</h1>
     ) : params.level === "2" ? (
-      <h2 contentEditable={isLoggedin} style={headerStyling}>
-        {content}
-      </h2>
+      <h2 style={headerStyling}>{content}</h2>
     ) : (
-      <h3 contentEditable={isLoggedin} style={headerStyling}>
-        {content}
-      </h3>
+      <h3 style={headerStyling}>{content}</h3>
     );
 
   return (

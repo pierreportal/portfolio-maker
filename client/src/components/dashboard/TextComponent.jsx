@@ -5,7 +5,7 @@ export default function TextComponent(props) {
 
   return (
     <div className="text-component" style={style}>
-      <p contentEditable={isLoggedin}>{content}</p>
+      <p>{content}</p>
     </div>
   );
 }
