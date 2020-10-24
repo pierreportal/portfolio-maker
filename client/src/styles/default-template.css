@@ -22,20 +22,20 @@
 
 .dashboard-headmenu {
   padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .dashboard-headmenu h1 {
-  margin: 0;
-  text-align: left;
+  /* margin: 0; */
+  /* text-align: left; */
   font-size: 2rem;
   font-weight: 300;
+
   /* margin-right: 3.5rem; */
 }
 
 .dashboard-sidebar {
-  width: 8rem;
+  min-width: 8rem;
   justify-content: space-between;
   padding: 1rem 2rem;
   display: flex;
@@ -72,4 +72,81 @@
 
 .containoverflow {
   overflow: hidden;
+}
+
+.new-page-placeholder {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-page-placeholder.has-sidebar {
+  width: calc(100vw - 16rem);
+}
+
+a.active {
+  font-weight: bold;
+}
+
+.add-element-button {
+  height: 2rem;
+  width: 1.5rem;
+  position: relative;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+.add-element-button.open {
+  width: 8rem;
+}
+.add-element-button input {
+  border: none;
+  height: 2rem;
+  outline: none;
+  background-color: #eee;
+  padding: 0.3rem;
+}
+
+.add-element-button.open > .add-element-button-plus {
+  left: 8rem;
+  transform: rotate(45deg);
+}
+.add-element-button-plus {
+  left: 0;
+  cursor: pointer;
+  width: 1.5rem !important;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  transition: all 0.2s ease;
+}
+.add-element-button:not(.open) > .add-element-button-plus {
+  opacity: 0.4;
+}
+.add-element-button:not(.open) > .add-element-button-plus:hover {
+  opacity: 1;
+}
+
+.remove-element-button-cross {
+  cursor: pointer;
+  width: 1.5rem !important;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  opacity: 0.4;
+  transform: rotate(45deg);
+}
+.remove-element-button-cross:hover {
+  opacity: 1;
+}
+
+.align-item-center {
+  align-items: center;
 }

@@ -6,18 +6,37 @@ import * as serviceWorker from "./serviceWorker";
 
 import { getSettings, getUser } from "./api";
 
+const defaultUserSetting = {
+  font: "helvetica",
+  bgColor: "white",
+  headMenu: true,
+  sideBar: true,
+  headingDefaultMargin: false,
+  languages: ["fr", "en"],
+  siteTitle: "Porfolio Maker",
+  routes: [
+    {
+      path: "/",
+      feedName: "main",
+      templateName: "mainPage",
+      label: "Home",
+    },
+  ],
+};
+
 const isLoggedin = true;
 
 getUser().then((user) => {
   getSettings().then((data) => {
-    document.title = data[0].siteTitle;
-    ReactDOM.render(
+    if (data[0]) document.title = data[0].siteTitle;
+
+    return ReactDOM.render(
       <React.StrictMode>
         <App
-          testUserSetting={data[0]}
+          testUserSetting={data[0] || defaultUserSetting}
           isLoggedin={isLoggedin}
           user={user}
-          routes={data[0].routes}
+          routes={data[0] || defaultUserSetting.routes}
         />
       </React.StrictMode>,
       document.getElementById("root")

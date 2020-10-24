@@ -1,0 +1,40 @@
+{
+  "startedConstantTemplate": {
+    "modules": [
+      {
+        "id": 0,
+        "type": "sectionTitle",
+        "label": "Section Title",
+        "content": "Welcome to your new portfolio :)",
+        "params": {},
+        "style": {
+          "padding": "2rem",
+          "backgroundColor": "transparent",
+          "width": "100vw",
+          "textAlign": "center"
+        }
+      }
+    ],
+    "owner": "",
+    "name": "constant"
+  },
+  "startedPageTemplate": {
+    "modules": [
+      {
+        "id": 0,
+        "type": "sectionTitle",
+        "label": "Section Title",
+        "content": "You can start building your page.",
+        "params": {},
+        "style": {
+          "padding": "2rem",
+          "backgroundColor": "transparent",
+          "width": "100vw",
+          "textAlign": "center"
+        }
+      }
+    ],
+    "owner": "",
+    "name": "mainPage"
+  }
+}

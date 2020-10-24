@@ -8,7 +8,8 @@ import {
   generateComponent,
   styledTemplateModule,
 } from "../../component-generator";
-
+import startedKidTemplateData from "../../starterKitData.json";
+console.log(startedKidTemplateData.startedConstantTemplate.modules);
 export default function Dashboard(props) {
   const { isLoggedin, testUserSetting, user, routes } = props;
   // GET COMPONENTS
@@ -17,7 +18,9 @@ export default function Dashboard(props) {
   const [feedFromDB, setFeedFromDB] = useState(); // No feed on daqshboard
   useEffect(
     () =>
-      getTemplate("constant").then((data) => setTemplateFromDB(data.modules)),
+      getTemplate("constant").then(
+        (data) => data && setTemplateFromDB(data.modules)
+      ),
     []
   );
   const buildTemplate = (modules) => {
@@ -35,6 +38,7 @@ export default function Dashboard(props) {
       });
     setModularTemplate(list);
   };
+  useEffect(() => console.log(templateFromDB), [templateFromDB]);
   useEffect(() => buildTemplate(templateFromDB), [templateFromDB]);
   // END GET COMPONENTS
 
@@ -71,9 +75,20 @@ export default function Dashboard(props) {
           }`}
           {...fontStyle}
         >
-          {addHeadMenu && <HeadMenu isLoggedin={isLoggedin} user={user} />}
+          {addHeadMenu && (
+            <HeadMenu
+              isLoggedin={isLoggedin}
+              user={user}
+              testUserSetting={testUserSetting}
+            />
+          )}
           <div className="row fullsize">
-            {addSideBar && <SideBar isLoggedin={isLoggedin} />}
+            {addSideBar && (
+              <SideBar
+                isLoggedin={isLoggedin}
+                testUserSetting={testUserSetting}
+              />
+            )}
 
             <div className={`feed-container col`} {...fullSized}>
               {modularTemplate}

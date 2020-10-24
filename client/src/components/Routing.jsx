@@ -14,23 +14,25 @@ export default function Routing(props) {
         atActive={{ opacity: 1 }}
         className="switch-wrapper"
       >
-        {routes.map((r) => {
-          return (
-            <Route
-              exact={true}
-              path={r.path}
-              component={() => (
-                <MainPage
-                  isLoggedin={isLoggedin}
-                  user={user}
-                  testUserSetting={testUserSetting}
-                  feedName={r.feedName}
-                  templateName={r.templateName}
-                />
-              )}
-            />
-          );
-        })}
+        {routes &&
+          routes.map((r) => {
+            return (
+              <Route
+                key={r}
+                exact={true}
+                path={r.path}
+                component={() => (
+                  <MainPage
+                    isLoggedin={isLoggedin}
+                    user={user}
+                    testUserSetting={testUserSetting}
+                    feedName={r.feedName}
+                    templateName={r.templateName}
+                  />
+                )}
+              />
+            );
+          })}
         <Route
           exact={true}
           path={"/feed-manager"}

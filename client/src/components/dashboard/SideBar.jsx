@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import Navigation from "../Navigation";
 
 export default function SideBar(props) {
+  const { testUserSetting } = props;
+
   return (
     <div className="dashboard-sidebar col">
       <ul>
-        <li>
-          <b>Work</b>
-        </li>
-        <li>Me</li>
-        <li>Contact</li>
+        <Navigation testUserSetting={testUserSetting} />
       </ul>
     </div>
   );

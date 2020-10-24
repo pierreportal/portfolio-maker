@@ -4,6 +4,7 @@ import {
   generateComponent,
   styledTemplateModule,
 } from "../../component-generator";
+import startedKidTemplateData from "../../starterKitData.json";
 
 export default function MainPage(props) {
   const { isLoggedin, user, testUserSetting, feedName, templateName } = props;
@@ -15,9 +16,14 @@ export default function MainPage(props) {
   useEffect(() => {
     getFeed(feedName).then((data) => setFeedFromDB({ posts: data }));
   }, []);
+
   useEffect(() => {
-    getTemplate(templateName).then((data) => setTemplateFromDB(data.modules));
+    getTemplate(templateName).then(
+      (data) => data && setTemplateFromDB(data.modules)
+    );
   }, [feedFromDB]);
+
+  useEffect(() => console.log(templateFromDB), [templateFromDB]);
 
   const buildTemplate = (modules) => {
     const list =
@@ -42,5 +48,19 @@ export default function MainPage(props) {
   useEffect(() => buildTemplate(templateFromDB), [templateFromDB]);
   // END GET COMPONENTS
 
-  return <>{modularTemplate}</>;
+  return (
+    <>
+      {modularTemplate.length ? (
+        modularTemplate
+      ) : (
+        <div
+          className={`new-page-placeholder ${
+            testUserSetting.sideBar && `has-sidebar`
+          }`}
+        >
+          Start right here
+        </div>
+      )}
+    </>
+  );
 }
