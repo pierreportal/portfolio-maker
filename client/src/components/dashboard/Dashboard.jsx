@@ -8,21 +8,31 @@ import {
   generateComponent,
   styledTemplateModule,
 } from "../../component-generator";
-import startedKidTemplateData from "../../starterKitData.json";
-console.log(startedKidTemplateData.startedConstantTemplate.modules);
+// import startedKidTemplateData from "../../starterKitData.json";
+
 export default function Dashboard(props) {
   const { isLoggedin, testUserSetting, user, routes } = props;
   // GET COMPONENTS
   const [modularTemplate, setModularTemplate] = useState();
   const [templateFromDB, setTemplateFromDB] = useState();
   const [feedFromDB, setFeedFromDB] = useState(); // No feed on daqshboard
-  useEffect(
-    () =>
-      getTemplate("constant").then(
+  // useEffect(
+  //   () =>
+  //     getTemplate("constant").then(
+  //       (data) => data && setTemplateFromDB(data.modules)
+  //     ),
+  //   []
+  // );
+
+  useEffect(() => {
+    async function fetchData() {
+      await getTemplate("constant").then(
         (data) => data && setTemplateFromDB(data.modules)
-      ),
-    []
-  );
+      );
+    }
+    fetchData();
+  }, []);
+
   const buildTemplate = (modules) => {
     const list =
       modules &&

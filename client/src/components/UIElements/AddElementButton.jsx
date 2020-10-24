@@ -18,6 +18,8 @@ export default function AddElementButton(props) {
     setInputValue(value);
   };
 
+  const handleBlur = () => setShowOptionEditor(false);
+
   return (
     <div className={`add-element-button ${showOptionEditor && "open"} row`}>
       {showOptionEditor && (
@@ -28,6 +30,7 @@ export default function AddElementButton(props) {
             placeholder={placeHolder}
             value={inputValue}
             autoFocus={true}
+            onBlur={handleBlur}
           />
         </form>
       )}

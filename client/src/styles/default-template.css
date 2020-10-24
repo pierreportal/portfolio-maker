@@ -107,7 +107,7 @@ a.active {
   background-color: #eee;
   padding: 0.3rem;
 }
-
+.add-element-button-dropdown.open > .add-element-button-plus,
 .add-element-button.open > .add-element-button-plus {
   left: 8rem;
   transform: rotate(45deg);
@@ -121,12 +121,14 @@ a.active {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  position: absolute;
+  /* position: absolute; */
   transition: all 0.2s ease;
 }
+.add-element-button-dropdown:not(.open) > .add-element-button-plus,
 .add-element-button:not(.open) > .add-element-button-plus {
   opacity: 0.4;
 }
+.add-element-button-dropdown:not(.open) > .add-element-button-plus:hover,
 .add-element-button:not(.open) > .add-element-button-plus:hover {
   opacity: 1;
 }
@@ -149,4 +151,73 @@ a.active {
 
 .align-item-center {
   align-items: center;
+}
+
+.draggable-container {
+  /* position: relative; */
+  transition: all 0.2s ease;
+  background-color: transparent;
+  border: dashed 0px #ddd;
+}
+
+.draggable-container.dragging {
+  padding: 0.3rem !important;
+  border-radius: 0.2rem;
+  border: dashed 0.1rem #ddd;
+}
+
+.draggable-item {
+  min-height: 1.5rem;
+}
+
+.add-element-button-dropdown {
+  height: 1.5rem;
+  margin: 0.3rem 0;
+  /* position: relative; */
+  transition: all 0.2s ease;
+  /* align-items: center; */
+  /* display: block; */
+}
+.add-element-button-dropdown.open {
+  background-color: #ddd;
+}
+
+.add-element-button-dropdown-container {
+  /* border: solid 1px #ddd; */
+  /* position: absolute; */
+  padding: 0.3rem;
+  /* width: 100%; */
+  /* max-height: 20rem; */
+  /* overflow: scroll; */
+  top: 0;
+  /* padding: 0.3rem; */
+  display: flex;
+}
+
+.add-element-button-dropdown-container ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.add-element-button-dropdown-container ul li {
+  background-color: #ddd;
+  margin-right: 0.15rem;
+  padding: 0.3rem;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+.add-element-button-dropdown-container ul li:hover {
+  background-color: #eee;
+}
+
+.add-element-button-dropdown-container ul li:last-of-type {
+  margin-right: 0;
+}
+
+.switch-wrapper > div {
+  width: 100%;
 }

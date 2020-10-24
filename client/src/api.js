@@ -53,5 +53,10 @@ export const getSettings = () => {
 };
 
 export const editTemplateModule = () => {};
-
 export const deleteTemplateModule = () => {};
+
+export const updateRouteToDB = () => {};
+export const addNewRouteToDB = () => {};
+
+export const addNewModuleToDB = () => {};
+export const updateModuleOrderingToDB = () => {};

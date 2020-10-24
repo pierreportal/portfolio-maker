@@ -28,15 +28,15 @@ const isLoggedin = true;
 
 getUser().then((user) => {
   getSettings().then((data) => {
-    if (data[0]) document.title = data[0].siteTitle;
+    if (data && data[0]) document.title = data[0].siteTitle;
 
     return ReactDOM.render(
       <React.StrictMode>
         <App
-          testUserSetting={data[0] || defaultUserSetting}
+          testUserSetting={(data && data[0]) || defaultUserSetting}
           isLoggedin={isLoggedin}
           user={user}
-          routes={data[0] || defaultUserSetting.routes}
+          routes={(data && data[0]) || defaultUserSetting.routes}
         />
       </React.StrictMode>,
       document.getElementById("root")
