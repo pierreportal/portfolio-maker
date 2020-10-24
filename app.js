@@ -13,7 +13,9 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 mongoose
-  .connect("mongodb://localhost:3001/portfoliomaker", { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/portfoliomaker", {
+    useNewUrlParser: true,
+  })
   .then((connection) =>
     console.log(`Connected to ${connection.connections[0].name}`)
   )
